@@ -9,7 +9,7 @@ while (1)
     size_t len = 0; /* Move the declaration to the beginning */
     ssize_t read_len;
 
-    custom_print("$ ");
+    custom_print("#cisfun$ ");
 
     read_len = getline(&command, &len, stdin);
 

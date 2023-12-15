@@ -19,7 +19,7 @@ void execute_command(const char *command)
         args[0] = (char *)command;
         args[1] = NULL;
 
-        if (execve(command, args, NULL) == -1)
+        if (execve(args[0], args, NULL) == -1)
         {
             perror("execve");
             exit(EXIT_FAILURE);
