@@ -140,6 +140,5 @@ int handle_builtin_commands(char **args, int num_args, char *input, char **env)
 		print_env(env);
 		return (1);
 	}
-	
 	return (0);
 }

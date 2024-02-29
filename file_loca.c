@@ -69,8 +69,8 @@ char *get_file_loc(char *path, char *file_name)
   *
   * Return: The full path argument to the file
   */
-
-char *get_file_path(char *file_name)
+ 
+char *get_file_loc(char *path, char *file_name)
 {
 	char *path = getenv("PATH");
 	char *full_path;
