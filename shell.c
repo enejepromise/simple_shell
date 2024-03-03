@@ -1,25 +1,40 @@
 #include "shell.h"
 
 /**
- * main - wait program
- * argc: argument count
- * argv: arrays  of values
- * env: enviroment variable
+ * main - simple shell main function
+ * ac: argument count
+ * av: argument of values
  * Return - 0 Always sucess
  */
-int main(int argc, char *argv[], char **env)
+int main(int ac, char **argv, char **env)
 {
-	char *lineptr;
-	(void)argc;
+	char *line = NULL; **char command = NULL;
+	int i,  status = 0;
+	(void) ac;
 
 	while (1)
 	{
-		print_prompt();
-		lineptr = read_input();
-		execute_command(lineptr, argv, env);
-		free(lineptr);
-	}
+		line  = read_line();
+		if (line == NULL) /* when it reaches EOF or ctrl + D*/
+		{
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			return (status);
+		}
+		
+		command = tokenizer(line);
+		if (!command)
+			continue;
 
-	return (0);
+		for (i = 0; command[i]; i++)
+		{
+			printf("%s\n", command[i]);
+			free(command[i]), command[i] = NULL;
+		}
+		free(command), command = NULL;
+
+		
+		status = _execute(command, argv);
+	}
 }
 
